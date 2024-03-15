@@ -39,7 +39,7 @@ function Signup() {
         initial = "hidden"
         animate = "show"
         variants={fadeIn("right",0.3,0.5)}
-        className='w-full flex justify-center pt-20'>
+        className='w-full flex justify-center pt-20 md:pt-20 md:p-0 p-5'>
             <div className='bg-slate-700 w-[500px] rounded-2xl p-10'>
                 <div className='w-full flex justify-center items-center'>
                     <Logo size={"text-2xl"} color={"white"} />

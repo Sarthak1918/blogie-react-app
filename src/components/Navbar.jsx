@@ -83,7 +83,6 @@ function Navbar() {
       <div className="flex gap-2 items-center sm:hidden">
         <button className="text-xl" onClick={()=>{
           setShowMenu((prev)=>!prev)
-          console.log(showMenu);
         }}>
           &#9776;
         </button>
