@@ -1,6 +1,9 @@
 import { Client, Account, ID } from "appwrite";
 import conf from "../conf/conf";
+import useToast from "../components/useToast";
 
+
+const notify = useToast()
 
 export class AuthService {
     client = new Client()
@@ -24,7 +27,7 @@ export class AuthService {
                 return userAccount;
             }
         } catch (error) {
-            console.log(error);
+            notify(error.message,"error")
         }
     }
 
@@ -33,7 +36,7 @@ export class AuthService {
         try {
             return await this.account.createEmailSession(email, password);
         } catch (error) {
-            console.log(error);
+            notify(error.message,"error")
         }
     }
 

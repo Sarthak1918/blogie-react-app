@@ -36,7 +36,7 @@ function Login() {
             }
         } catch (error) {
             setError(error)
-            notify("Error!Try Again","error")
+            notify("Error!Try Again",error)
         }
 
     }
