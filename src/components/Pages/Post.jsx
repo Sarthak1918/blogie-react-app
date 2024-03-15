@@ -37,20 +37,18 @@ export default function Post() {
     };
 
     return post ? (
-        <div className="py-8">
-            <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+        <div className="py-8 px-10">
+                <div className="w-full p-4 md:p-8 flex justify-center mb-4 relative border rounded-xl">
                     <img
                         src={dbService.getFilePreview(post.featuredImage)}
                         alt={post.title}
-                        className="rounded-xl max-w-4xl"
-
+                        className="rounded-xl w-4xl"
                     />
 
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-600" className="mr-3 hover:bg-green-500">
+                                <Button bgColor="bg-green-600"  className="mr-3 hover:bg-green-500 text-xs">
                                     Edit
                                 </Button>
                             </Link>
@@ -66,7 +64,6 @@ export default function Post() {
                 <div className="browser-css">
                     {parse(post.content)}
                     </div>
-            </Container>
         </div>
     ) : null;
 }

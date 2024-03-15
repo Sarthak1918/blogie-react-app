@@ -15,10 +15,10 @@ class DBservice {
         this.bucket = new Storage(this.client)     //bucket is for storing images
     }
 
-    async createPost({ title, content, featuredImage, status, userId }) {  //we will get featuredImage which is a unique ID, when we successfully upload the file(image)
+    async createPost({ title, content, featuredImage, status, userId, userName }) {  //we will get featuredImage which is a unique ID, when we successfully upload the file(image)
         try {
             return await this.databases.createDocument(conf.appwriteDBId, conf.appwriteCollectionId, ID.unique(), {
-                title, content, featuredImage, status, userId
+                title, content, featuredImage, status, userId, userName
             });
         } catch (error) {
             console.log(error);
@@ -100,7 +100,7 @@ class DBservice {
 
     }
 
-    getFilePreview(fileId){ //here fileID is featuredImage,We will get this when we successfully upload image file
+    getFilePreview(fileId) { //here fileID is featuredImage,We will get this when we successfully upload image file
         return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
     }
 

@@ -6,6 +6,8 @@ import { login as storeLogin } from '../store/authSlice.js'
 import { useDispatch } from "react-redux"
 import { useForm } from 'react-hook-form'
 import useToast from './useToast.js'
+import {motion} from "framer-motion"
+import { fadeIn } from './framer.js'
 
 
 
@@ -40,7 +42,13 @@ function Login() {
     }
 
     return (
-        <div className='w-full flex justify-center pt-20'>
+        <motion.div
+        initial = "hidden"
+        animate = "show"
+        variants={fadeIn("right",0.3,0.5)}
+        
+        
+        className='w-full flex justify-center pt-20'>
         <div className='bg-slate-700 w-[500px] rounded-2xl p-10'>
             <div className='w-full flex flex-col justify-center items-center text-white gap-5'>
                 <Logo size={"text-2xl"} color={"white"} />
@@ -83,7 +91,7 @@ function Login() {
                 <span>Don't have any account? <Link to="/signup" className='underline'>Sign up here</Link> </span>
             </div>
         </div>
-    </div>
+    </motion.div>
     )
 }
 

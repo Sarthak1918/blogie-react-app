@@ -54,7 +54,8 @@ function PostForm({ post }) {
                 data.featuredImage = file.$id
                 const dbPost = await dbService.createPost({
                     ...data,
-                    userId: userData.$id
+                    userId: userData.$id,
+                    userName : userData.name
                 })
 
 
@@ -70,8 +71,8 @@ function PostForm({ post }) {
 
 
     return (
-        <form className='p-5 flex font-semibold text-sm' onSubmit={handleSubmit(submit)}>
-            <div className='w-2/3 px-5'>
+        <form className='p-5 flex flex-col gap-4 md:flex-row font-semibold text-sm' onSubmit={handleSubmit(submit)}>
+            <div className='md:w-2/3 px-5'>
                 <Input
                     label='Title: '
                     placeholder='Enter title'
@@ -90,7 +91,7 @@ function PostForm({ post }) {
             </div>
 
 
-            <div className='w-1/3 px-5'>
+            <div className='md:w-1/3 px-5'>
                 <Input
                     label="Featured image :"
                     type="file"

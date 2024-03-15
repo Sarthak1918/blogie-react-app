@@ -7,6 +7,8 @@ import { login as authLogin } from '../store/authSlice.js'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from "react-redux"
 import useToast from './useToast.js'
+import { fadeIn } from './framer.js'
+import {motion} from "framer-motion"
 
 function Signup() {
     const navigate = useNavigate()
@@ -33,7 +35,11 @@ function Signup() {
     }
 
     return (
-        <div className='w-full flex justify-center pt-20'>
+        <motion.div
+        initial = "hidden"
+        animate = "show"
+        variants={fadeIn("right",0.3,0.5)}
+        className='w-full flex justify-center pt-20'>
             <div className='bg-slate-700 w-[500px] rounded-2xl p-10'>
                 <div className='w-full flex justify-center items-center'>
                     <Logo size={"text-2xl"} color={"white"} />
@@ -81,7 +87,7 @@ function Signup() {
                     <span>Already have account? <Link to="/login" className='underline'>Login here</Link></span>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
