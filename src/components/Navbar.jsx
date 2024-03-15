@@ -9,18 +9,16 @@ function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setShowMenu(false);
-      }
-    }
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [menuRef]);
+
+  const handleMenuToggle = () => {
+    setShowMenu(!showMenu);
+  };
+
+  const handleMenuItemClick = (slug) => {
+    setShowMenu(false); // Close the menu when any item is clicked
+    navigate(slug);
+  };
 
   const navItems = [
     {
@@ -71,7 +69,7 @@ function Navbar() {
                 key={item.name}
                 className="hover:bg-blue-100 px-3 py-1 rounded-full transition-all"
               >
-                <button onClick={() => navigate(item.slug)}>{item.name}</button>
+                <button onClick={() => handleMenuItemClick(item.slug)}>{item.name}</button>
               </li>
             )
         )}
@@ -83,10 +81,12 @@ function Navbar() {
       </ul>
 
       <div className="flex gap-2 items-center sm:hidden">
-        <button className="text-xl" onClick={() => setShowMenu(!showMenu)}>
+        <button className="text-xl" onClick={()=>{
+          setShowMenu((prev)=>!prev)
+          console.log(showMenu);
+        }}>
           &#9776;
         </button>
-        <ThemeSwitcher />
       </div>
     </div>
   );
