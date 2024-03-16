@@ -7,18 +7,19 @@ import { Query } from "appwrite";
 
 function MyPosts() {
     const [posts, setPosts] = useState([])
-    const userData = useSelector((state)=>state.auth.userData)
     const [loader,setLoader] = useState(false)
+    const userID = useSelector((state)=>state.auth.userData.$id)
     useEffect(() => {
-        setLoader(true)
-        dbService.getAllPosts([Query.equal("userId", [userData.$id])]).then((posts) => {
-            if (posts) {
-                setPosts(posts.documents)
-                setLoader(false)
-            }
-        })
-    }, [])
-
+        if (userID) { // Check if userID is defined
+            setLoader(true)
+            dbService.getAllPosts([Query.equal("userId", [userID])]).then((posts) => {
+                if (posts) {
+                    setPosts(posts.documents)
+                    setLoader(false)
+                }
+            })
+        }
+    }, [userID]) // Add userID as dependency
 
     {
         if(loader){

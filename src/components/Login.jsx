@@ -24,12 +24,10 @@ function Login() {
     async function login(data) {
         try {
             const session = await authService.login(data)
-            console.log(data,"data");
             if (session) {
                 const userData = await authService.getCurrentUser()
                 if (userData) {
-                    dispatch(storeLogin(userData))
-                    console.log(userData,"userData");
+                    dispatch(storeLogin({userData})) //{} -> is important
                     notify("Logged in Successfully","success")
                 }
                 navigate("/")
