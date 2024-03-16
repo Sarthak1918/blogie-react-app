@@ -23,7 +23,7 @@ function Signup() {
             if (user) {
                 const userData = await authService.getCurrentUser()
                 if (userData) {
-                    dispatch(authLogin(userData))
+                    dispatch(authLogin({userData}))
                     notify("Signed up successfully","success")
                 }
                 navigate("/")
