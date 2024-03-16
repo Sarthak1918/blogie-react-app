@@ -10,7 +10,7 @@ function MyPosts() {
     const [loader,setLoader] = useState(false)
     const userData = useSelector((state)=>state.auth.userData)
     useEffect(() => {
-        if (userID) { // Check if userID is defined
+        if (userData) { // Check if userID is defined
             setLoader(true)
             dbService.getAllPosts([Query.equal("userId", [userData.$id])]).then((posts) => {
                 if (posts) {
