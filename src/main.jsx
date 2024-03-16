@@ -70,7 +70,12 @@ const router = createBrowserRouter([
         },
         {
             path: "/post/:postID",
-            element: <Post />,
+            element: (
+            <AuthLayout authentication>
+                    {" "}
+                    <Post />
+                </AuthLayout>
+            ),
         },
     ],
 },

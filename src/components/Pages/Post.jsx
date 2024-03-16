@@ -5,6 +5,9 @@ import { Button, Container } from "../index.js";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import useToast from "../useToast.js";
+import { FaEdit } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
+
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -28,8 +31,8 @@ export default function Post() {
     const deletePost = () => {
         dbService.deletePost(post.$id).then((status) => {
             if (status) {
-                dbService.deleteFile(post.featuredImage).then(()=>{
-                    notify("Post deleted","success")
+                dbService.deleteFile(post.featuredImage).then(() => {
+                    notify("Post deleted", "success")
                 })
                 navigate("/");
             }
@@ -38,32 +41,32 @@ export default function Post() {
 
     return post ? (
         <div className="py-8 px-10">
-                <div className="w-full p-4 md:p-8 flex justify-center mb-4 relative border rounded-xl">
-                    <img
-                        src={dbService.getFilePreview(post.featuredImage)}
-                        alt={post.title}
-                        className="rounded-xl w-4xl"
-                    />
+            <div className="w-full p-4 md:p-8 flex justify-center mb-4 relative border rounded-xl">
+                <img
+                    src={dbService.getFilePreview(post.featuredImage)}
+                    alt={post.title}
+                    className="rounded-xl w-4xl md:max-w-[60%]"
+                />
 
-                    {isAuthor && (
-                        <div className="absolute right-6 top-6">
-                            <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-600"  className="mr-3 hover:bg-green-500 text-xs">
-                                    Edit
-                                </Button>
-                            </Link>
-                            <Button bgColor="bg-red-600" className="hover:bg-red-500" onClick={deletePost}>
-                                Delete
+                {isAuthor && (
+                    <div className="absolute right-1 top-3 md:right-6 md:top-6">
+                        <Link to={`/edit-post/${post.$id}`}>
+                            <Button bgColor="bg-indigo-500" className=" hover:bg-indigo-400 text-xs">
+                                <FaEdit/>
                             </Button>
-                        </div>
-                    )}
-                </div>
-                <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
-                </div>
-                <div className="browser-css">
-                    {parse(post.content)}
+                        </Link>
+                        <Button bgColor="bg-red-600" className="hover:bg-red-500" onClick={deletePost}>
+                            <MdDeleteForever/>
+                        </Button>
                     </div>
+                )}
+            </div>
+            <div className="w-full mb-4 md:mb-6 p-5">
+                <h1 className="text-3xl md:text-4xl font-extrabold">{post.title}</h1>
+            </div>
+            <div className="browser-css md:text-lg  font-semibold p-5">
+                {parse(post.content)}
+            </div>
         </div>
     ) : null;
 }
